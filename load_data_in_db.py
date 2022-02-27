@@ -26,7 +26,7 @@ def get_weather_for_timeseries(start_date, end_date, lat, lon):
 
     for i in range(day_delta.days + 1):
         day = start_date + timedelta(days=i)
-        print(day)
+        #print(day)
         dicto = {'date': f"{day}", 'lat': lat, 'lon': lon}
         r = requests.get(get_url_by_endpoint_name(weather_endpoint), params= dicto)
         day_weather = r.json()
@@ -40,7 +40,6 @@ client = MongoClient(port=27017)
 db=client.weather_data
 
 #declare variables
-system_url = 'https://api.brightsky.dev'
 weather_endpoint = '/weather'
 timeseries_weather = []
 start_date = date(2022, 1, 1)
