@@ -12,6 +12,8 @@ lon = '8.41'
 
 load = load_weather_data_in_db(weather_endpoint, start_date, end_date , lat, lon)
 
+#schedule.every(5).seconds.do(load.insert_data)
+
 schedule.every().day.at("08:30").do(load.insert_data)
 
 while True:

@@ -1,6 +1,16 @@
 #import relevant modules
 import requests
-from datetime import timedelta
+from datetime import timedelta, date
+import logging
+import logging.config
+import yaml
+import typing
+
+with open('config.yaml', 'r') as f:
+    config = yaml.safe_load(f.read())
+    logging.config.dictConfig(config)
+
+logger = logging.getLogger(__name__)
 
 class Weather_Extraction:
     """sends multiple GET requests to Bright Sky API for dates within start_date 
@@ -15,14 +25,14 @@ class Weather_Extraction:
 
     """
     system_url = 'https://api.brightsky.dev'
-    timeseries_weather = []
-    def __init__(self, endpoint_name, start_date, end_date, lat, lon):
+    timeseries_weather: typing.List[dict] = []
+    def __init__(self, endpoint_name: str, start_date: date, end_date: date, lat: str, lon: str) -> None:
         self.endpoint_name = endpoint_name
         self.start_date = start_date
         self.end_date = end_date
         self.lat = lat
         self.lon = lon    
-    def get_weather_for_timeseries(self):   
+    def get_weather_for_timeseries(self) -> typing.List[dict]:   
         day_delta = self.end_date - self.start_date   
 
         for i in range(day_delta.days + 1):
@@ -32,6 +42,6 @@ class Weather_Extraction:
             day_weather = r.json()
             self.timeseries_weather.append(day_weather)
 
-        return self.timeseries_weather  
+        logging.info('Weather data extracted')
 
-    
+        return self.timeseries_weather   
