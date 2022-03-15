@@ -4,7 +4,8 @@
 
 - extract weather data from [Bright Sky API](https://brightsky.dev/)
 - insert weather data into [MongoDB (Community Server)](https://www.mongodb.com/try/download/community)
-- derive meaningful insights from MongoDB data
+- load weather data stored in MongoDB in PostgreSQL
+- derive meaningful insights from weather data
 
 ## Technologies
 
@@ -24,3 +25,20 @@ pip install -r requirements.txt
 ```
 
 (`requirements.txt` still needs to be added)
+
+## Formatting
+We use black for formatting 
+```
+pip install black
+```
+
+To configure format-on-save go to Settings, search for Python formatting provider and select black. Then search for format-on-save and activate the checkbox. 
+
+## Linting
+We use Pylint for linting
+```
+pip install pylint
+```
+
+To enable linting in VS Code, type Ctr+Shift+P and type  "python select linter", then select pylint. 
+
