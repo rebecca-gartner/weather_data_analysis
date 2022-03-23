@@ -23,62 +23,70 @@ cursor = conn.cursor()
 sql_file = open("create_weather_table.sql", "r")
 cursor.execute(sql_file.read())
 
+sql_file = open("create_source_table.sql", "r")
+cursor.execute(sql_file.read())
+
+sql_file = open("check_source_id.sql", "r")
+get_ids = cursor.execute(sql_file.read())
+ids = cursor.fetchall()
+id_list = []
+if len(ids) > 0:
+    for i in range(len(ids[0])):
+        id_list.append(ids[0][i])
+
+
 weather_list = []
 
-# print(col.find_one({"timestamp": "'2022-02-25T20:00:00+00:00'"}))
-for x in col.find(
-    {},
-    {
-        "weather.source_id": 1,
-        "weather.timestamp": 1,
-        "weather.temperature": 1,
-        "weather.cloud_cover": 1,
-        "weather.condition": 1,
-        "weather.dew_point": 1,
-        "weather.precipitation": 1,
-        "weather.pressure_msl": 1,
-        "weather.relative_humidity": 1,
-        "weather.sunshine": 1,
-        "weather.visibility": 1,
-        "weather.wind_direction": 1,
-        "weather.wind_speed": 1,
-        "weather.wind_gust_direction": 1,
-        "weather.wind_gust_speed": 1,
-    },
-):
-    # print(x)
-    weather_list = []
-    weather_list.append(x)
-    columns = list(weather_list[0]["weather"][0].keys())
-    columns = "[{}]".format(", ".join(columns))
-    # for i in range(0, len(weather_list["weather"])):
-    # print(weather_list[0]["weather"][0])
+x = col.find_one({"data.weather.timestamp": {"$regex": ".*2022-03-16.*"}})
 
-    print(len(weather_list[0]["weather"]))
-    if len(weather_list[0]["weather"]) < 4:
-        for j in range(len(weather_list[0]["weather"])):
 
-            weather_values_list = list(weather_list[0]["weather"][j].values())
-            weather_values_list[0] = datetime.strptime(
-                weather_values_list[0], "%Y-%m-%dT%H:%M:%S%z"
-            )
+weather_list.append(x)
+columns = list(weather_list[0]["data"]["weather"][0].keys())
 
-            weather_values_tuple = tuple(weather_values_list)
+columns = "[{}]".format(", ".join(columns))
 
-            sql_file2 = open("insert_into_weather_table.sql", "r")
-            cursor.execute(sql_file2.read(), weather_values_tuple)
-    else:
-        for j in range(0, 4):
+if len(weather_list[0]["data"]["weather"]) < 4:
 
-            weather_values_list = list(weather_list[0]["weather"][j].values())
-            weather_values_list[0] = datetime.strptime(
-                weather_values_list[0], "%Y-%m-%dT%H:%M:%S%z"
-            )
+    for j in range(len(weather_list[0]["data"]["weather"])):
 
-            weather_values_tuple = tuple(weather_values_list)
+        weather_values_list = list(weather_list[0]["data"]["weather"][j].values())
+        weather_values_list[0] = datetime.strptime(
+            weather_values_list[0], "%Y-%m-%dT%H:%M:%S%z"
+        )
+        weather_values_list[15] = str(weather_values_list[15])
 
-            sql_file2 = open("insert_into_weather_table.sql", "r")
-            cursor.execute(sql_file2.read(), weather_values_tuple)
+        weather_values_tuple = tuple(weather_values_list)
+
+        weather_source_tuple = tuple(
+            list(weather_list[0]["data"]["sources"][j].values())
+        )
+
+        sql_file2 = open("insert_into_weather_table.sql", "r")
+        cursor.execute(sql_file2.read(), weather_values_tuple)
+
+        if weather_source_tuple[0] not in id_list:
+            sql_file2 = open("insert_into_source_table.sql", "r")
+            cursor.execute(sql_file2.read(), weather_source_tuple)
+else:
+    for j in range(0, 4):
+
+        weather_values_list = list(weather_list[0]["data"]["weather"][j].values())
+
+        weather_values_list[0] = datetime.strptime(
+            weather_values_list[0], "%Y-%m-%dT%H:%M:%S%z"
+        )
+        weather_values_list[15] = str(weather_values_list[15])
+
+        weather_values_tuple = tuple(weather_values_list)
+        weather_source_tuple = tuple(
+            list(weather_list[0]["data"]["sources"][j].values())
+        )
+
+        sql_file2 = open("insert_into_weather_table.sql", "r")
+        cursor.execute(sql_file2.read(), weather_values_tuple)
+        if weather_source_tuple[0] not in id_list:
+            sql_file2 = open("insert_into_source_table.sql", "r")
+            cursor.execute(sql_file2.read(), weather_source_tuple)
 
 
 conn.commit()

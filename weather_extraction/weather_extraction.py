@@ -1,6 +1,6 @@
 # import relevant modules
 import requests
-from datetime import timedelta, date
+from datetime import timedelta, date, datetime
 import logging
 import typing
 
@@ -24,7 +24,12 @@ class Weather_Extraction:
     timeseries_weather: typing.List[dict] = []
 
     def __init__(
-        self, endpoint_name: str, start_date: date, end_date: date, lat: str, lon: str
+        self,
+        endpoint_name: str,
+        start_date: datetime,
+        end_date: datetime,
+        lat: str,
+        lon: str,
     ) -> None:
         self.endpoint_name = endpoint_name
         self.start_date = start_date
@@ -33,14 +38,16 @@ class Weather_Extraction:
         self.lon = lon
 
     def get_weather_for_timeseries(self) -> typing.List[dict]:
-        day_delta = self.end_date - self.start_date
 
-        for i in range(day_delta.days + 1):
-            day = self.start_date + timedelta(days=i)
-            dicto = {"date": f"{day}", "lat": self.lat, "lon": self.lon}
-            r = requests.get(self.system_url + self.endpoint_name, params=dicto)
-            day_weather = r.json()
-            self.timeseries_weather.append(day_weather)
+        dicto = {
+            "date": f"{self.start_date}",
+            "last_date": f"{self.end_date}",
+            "lat": self.lat,
+            "lon": self.lon,
+        }
+        r = requests.get(self.system_url + self.endpoint_name, params=dicto)
+        day_weather = r.json()
+        self.timeseries_weather.append(day_weather)
 
         logging.info("Weather data extracted")
 

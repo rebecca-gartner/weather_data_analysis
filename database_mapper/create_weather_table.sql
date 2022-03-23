@@ -1,4 +1,4 @@
-CREATE  TABLE IF NOT EXISTS WEATHER_DETAILS3(timestamp timestamp,
+CREATE  TABLE IF NOT EXISTS WEATHER_DETAILS4(timestamp timestamp,
         source_id int NOT NULL,
         precipitation varchar(255),
         pressure_msl float,
@@ -12,4 +12,7 @@ CREATE  TABLE IF NOT EXISTS WEATHER_DETAILS3(timestamp timestamp,
         visibility float,
         wind_gust_direction float,
         wind_gust_speed float,
-        condition varchar(255));
+        condition varchar(255),
+        fallback_source_ids varchar(255),
+        icon varchar(255)
+        );

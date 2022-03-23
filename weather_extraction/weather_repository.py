@@ -6,10 +6,10 @@ import logging
 logger = logging.getLogger(__name__)
 
 weather_endpoint = "/weather"
-start_date = datetime.date.today()
-end_date = datetime.date.today()
-lat = "49.24"
-lon = "8.41"
+# start_date = datetime.date.today()
+# end_date = datetime.date.today()
+# lat = "49.24"
+# lon = "8.41"
 
 
 class load_weather_data_in_db:
@@ -43,6 +43,7 @@ class load_weather_data_in_db:
             {"insertion_date": datetime.datetime.now(), "data": sample}
             for sample in extracted_data
         ]
+        print(insertion_data)
 
         result = self.db.reviews.insert_many(insertion_data)
 

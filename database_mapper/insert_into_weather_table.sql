@@ -1,4 +1,4 @@
-insert into WEATHER_DETAILS3(
+insert into WEATHER_DETAILS4(
 
     timestamp ,
     source_id ,
@@ -14,4 +14,6 @@ insert into WEATHER_DETAILS3(
     visibility ,
     wind_gust_direction ,
     wind_gust_speed,
-    condition ) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);
+    condition ,
+    fallback_source_ids,
+    icon) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);
