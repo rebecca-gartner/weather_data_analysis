@@ -41,6 +41,8 @@ x = col.find_one({"data.weather.timestamp": {"$regex": ".*2022-03-16.*"}})
 
 
 weather_list.append(x)
+
+
 columns = list(weather_list[0]["data"]["weather"][0].keys())
 
 columns = "[{}]".format(", ".join(columns))
@@ -57,6 +59,7 @@ if len(weather_list[0]["data"]["weather"]) < 4:
 
         weather_values_tuple = tuple(weather_values_list)
 
+    for j in range(len(weather_list[0]["data"]["sources"])):
         weather_source_tuple = tuple(
             list(weather_list[0]["data"]["sources"][j].values())
         )
@@ -67,6 +70,7 @@ if len(weather_list[0]["data"]["weather"]) < 4:
         if weather_source_tuple[0] not in id_list:
             sql_file2 = open("insert_into_source_table.sql", "r")
             cursor.execute(sql_file2.read(), weather_source_tuple)
+
 else:
     for j in range(0, 4):
 
@@ -84,6 +88,17 @@ else:
 
         sql_file2 = open("insert_into_weather_table.sql", "r")
         cursor.execute(sql_file2.read(), weather_values_tuple)
+        if weather_source_tuple[0] not in id_list:
+            sql_file2 = open("insert_into_source_table.sql", "r")
+            cursor.execute(sql_file2.read(), weather_source_tuple)
+    for j in range(len(weather_list[0]["data"]["sources"])):
+        weather_source_tuple = tuple(
+            list(weather_list[0]["data"]["sources"][j].values())
+        )
+
+        sql_file2 = open("insert_into_weather_table.sql", "r")
+        cursor.execute(sql_file2.read(), weather_values_tuple)
+
         if weather_source_tuple[0] not in id_list:
             sql_file2 = open("insert_into_source_table.sql", "r")
             cursor.execute(sql_file2.read(), weather_source_tuple)
