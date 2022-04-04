@@ -1,5 +1,4 @@
 insert into WEATHER_SOURCES(
-
     id ,
     dwd_station_id ,
     observation_type,

@@ -58,6 +58,5 @@ else:
     result = db.reviews.insert_one(timeseries_weather)
     print(result.inserted_ids)
 
-# fivestarcount = next(db.weather_data.find({}))
-# print(fivestarcount)
+
 print(get_weather_for_timeseries(start_date, end_date, lat, lon))

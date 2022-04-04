@@ -1,5 +1,4 @@
 insert into WEATHER_DETAILS4(
-
     timestamp ,
     source_id ,
     precipitation,

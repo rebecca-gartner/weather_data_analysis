@@ -6,10 +6,6 @@ import logging
 logger = logging.getLogger(__name__)
 
 weather_endpoint = "/weather"
-# start_date = datetime.date.today()
-# end_date = datetime.date.today()
-# lat = "49.24"
-# lon = "8.41"
 
 
 class load_weather_data_in_db:

@@ -13,16 +13,14 @@ from weather_repository import load_weather_data_in_db
 from weather_extraction import Weather_Extraction
 
 weather_endpoint = "/weather"
-start_date = datetime.datetime(2022, 3, 20, 13, 00, 00)
-# print(start_date)
-end_date = datetime.datetime(2022, 3, 23, 12, 00, 00)
+start_date = datetime.datetime(2020, 1, 1, 00, 00, 00)
+end_date = datetime.datetime(2022, 1, 3, 00, 00, 00)
 lat = "49.24"
 lon = "8.41"
 
 load_data = load_weather_data_in_db(weather_endpoint, start_date, end_date, lat, lon)
 load_data.insert_data()
 
-# schedule.every(5).seconds.do(load.insert_data)
 
 # schedule.every().day.at("08:30").do(load.insert_data)
 

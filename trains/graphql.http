@@ -1,0 +1,22 @@
+@clientID=420aefcc-e538-4e69-926c-28defbab776b
+@tenantID=87cd3c4f-1e0a-4350-889e-3969cd4616c9
+@clientSecret=RUA7Q~pyycLcFj8LHldRPAcHLKms34gLTChSW
+@resource=1484212f-edce-452a-aae9-46141bae91af
+@hostname=https://graphql-sandbox-dds.rnv-online.de
+
+
+###
+# @name getAccessTokenForClient
+POST https://login.microsoftonline.com/{{tenantID}}/oauth2/token
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials
+&client_id={{clientID}}
+&client_secret={{clientSecret}}
+&resource={{resource}}
+
+###
+POST {{hostname}}/
+Authorization: Bearer {{getAccessTokenForClient.response.body.$.access_token}}
+
+{"query": "{\n  station(id:\"2417\") {\n    hafasID\n    longName\n    journeys(startTime: \"2022-01-01T11:17:00Z\" first: 5) {\n      totalCount\n      elements {\n        ... on Journey {\n          \n          line {\n            id\n          }\n          \n          stops {\n            \n            plannedDeparture {\n              isoString\n            }\n            \n            realtimeDeparture {\n              isoString\n            }\n          }\n        }\n      }\n    }\n  }\n}"}
