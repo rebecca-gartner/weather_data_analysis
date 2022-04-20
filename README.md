@@ -42,3 +42,7 @@ pip install pylint
 
 To enable linting in VS Code, type Ctr+Shift+P and type  "python select linter", then select pylint. 
 
+{'hafasID': '1160', 'globalID': 'de:08221:1160', 'longName': 'Heidelberg Hauptbahnhof'}, 
+{'hafasID': '1214', 'globalID': 'de:08221:1214', 'longName': 'Heidelberg Hauptbahnhof West'}, {'hafasID': '1144', 'globalID': 'de:08221:1144', 'longName': 'Betriebshof'},
+ {'hafasID': '4272', 'globalID': 'de:08221:4272', 'longName': 'Heidelberg Hauptbahnhof Süd'},
+
