@@ -113,7 +113,7 @@ df = df.drop_duplicates()
 print(df)
 
 
-sql = """CREATE TABLE IF NOT EXISTS traindelays(hafasID int ,
+sql = """CREATE TABLE IF NOT EXISTS traindelays3(hafasID int ,
 Stationname char(200) ,line char(20),stop_in_one_journey int, planned_departure char(30), realtime_departure char(30), delay interval);"""
 
 cursor.execute(sql)
@@ -141,7 +141,7 @@ def execute_values(conn, df, table):
 
 
 # using the function defined
-execute_values(conn, df, "traindelays")
+execute_values(conn, df, "traindelays3")
 
 
 conn.commit()

@@ -37,13 +37,9 @@ bearer = token["accessToken"]
 
 logger = logging.getLogger(__name__)
 
-startTime = "2022-03-26T11:17:00Z"
-hafasID = 4272
-first_n = 5
-
 
 class Train_Delay_Extraction:
-    """sends  GET requests to RNV API for information on train delays at a particular train station
+    """sends  POST requests to RNV API for information on train delays at a particular train station
       and returns JSON
 
     -------------

@@ -4,8 +4,9 @@ import datetime
 import logging
 import logging.config
 import yaml
+import pytz
 
-with open("config.yaml", "r") as f:
+with open("weather_extraction\config.yaml", "r") as f:
     config = yaml.safe_load(f.read())
     logging.config.dictConfig(config)
 
@@ -13,12 +14,22 @@ from weather_repository import load_weather_data_in_db
 from weather_extraction import Weather_Extraction
 
 weather_endpoint = "/weather"
-start_date = datetime.datetime(2020, 1, 1, 00, 00, 00)
-end_date = datetime.datetime(2022, 1, 3, 00, 00, 00)
+tz = pytz.timezone("Europe/Berlin")
+
+start_date = datetime.datetime(2022, 1, 1, 00, 00, 00).astimezone(
+    pytz.timezone("Europe/Berlin")
+)
+start_date_utc = start_date.astimezone(pytz.utc)
+end_date = datetime.datetime(2022, 4, 20, 20, 00, 00).astimezone(
+    pytz.timezone("Europe/Berlin")
+)
+end_date_utc = end_date.astimezone(pytz.utc)
 lat = "49.24"
 lon = "8.41"
-
-load_data = load_weather_data_in_db(weather_endpoint, start_date, end_date, lat, lon)
+print(start_date_utc)
+load_data = load_weather_data_in_db(
+    weather_endpoint, start_date_utc, end_date_utc, lat, lon
+)
 load_data.insert_data()
 
 
