@@ -1,6 +1,7 @@
 from pymongo import MongoClient
 from train_delay_extraction import Train_Delay_Extraction
 import logging
+import os
 
 logger = logging.getLogger(__name__)
 
@@ -10,7 +11,7 @@ class load_train_data_in_db:
     RNV API into Train DB
     """
 
-    client = MongoClient(port=27017)
+    client = MongoClient(port=os.environ.get("PORT"))
     db = client.train_data
 
     def __init__(self, hafasID: int, startTime: str, first_n: int) -> None:
@@ -27,13 +28,4 @@ class load_train_data_in_db:
         ids = result.inserted_id
 
         logger.info("Data inserted into DB")
-
-        return print(f"{ids} inserted in DB")
-
-
-startTime = "2022-03-26T11:17:00Z"
-hafasID = 4272
-first_n = 5
-
-load_data = load_train_data_in_db(hafasID, startTime, first_n)
-load_data.insert_data()
+        print(f"{ids} inserted in DB")
