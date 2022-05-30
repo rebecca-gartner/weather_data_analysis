@@ -1,5 +1,5 @@
-insert into WEATHER_DETAILS4(
-    timestamp ,
+INSERT INTO WEATHER_DETAILS4
+    (timestamp ,
     source_id ,
     precipitation,
     pressure_msl ,
@@ -15,4 +15,6 @@ insert into WEATHER_DETAILS4(
     wind_gust_speed,
     condition ,
     fallback_source_ids,
-    icon) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);
+    icon) 
+VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
+;

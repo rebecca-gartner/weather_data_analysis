@@ -1,1 +1,4 @@
-select distinct id from WEATHER_SOURCES;
+SELECT
+    DISTINCT id 
+FROM WEATHER_SOURCES
+;

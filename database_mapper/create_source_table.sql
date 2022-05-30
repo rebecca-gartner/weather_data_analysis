@@ -1,12 +1,14 @@
-CREATE  TABLE IF NOT EXISTS WEATHER_SOURCES(id int NOT NULL,
-        dwd_station_id varchar(255),
-        observation_type varchar(255),
-        lat float,
-        lon  float,
-        height float,
-        station_name varchar(255),
-        wmo_station_id varchar(255),
-        first_record timestamp,
-        last_record timestamp,
-        distance float
-        );
+CREATE  TABLE IF NOT EXISTS WEATHER_SOURCES
+    (id INT NOT NULL,
+    dwd_station_id VARCHAR(255),
+    observation_type VARCHAR(255),
+    lat FLOAT,
+    lon  FLOAT,
+    height FLOAT,
+    station_name VARCHAR(255),
+    wmo_station_id VARCHAR(255),
+    first_record timestamp,
+    last_record timestamp,
+    distance FLOAT
+    )
+;

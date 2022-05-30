@@ -1,5 +1,5 @@
-insert into WEATHER_SOURCES(
-    id ,
+INSERT INTO WEATHER_SOURCES
+    (id ,
     dwd_station_id ,
     observation_type,
     lat ,
@@ -9,4 +9,6 @@ insert into WEATHER_SOURCES(
     wmo_station_id ,
     first_record ,
     last_record ,
-    distance) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);
+    distance) 
+VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
+;
