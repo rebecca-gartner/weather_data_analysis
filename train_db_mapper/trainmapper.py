@@ -12,6 +12,7 @@ from asyncio.log import logger
 
 
 PARAMS = config()
+DATE = 2022
 
 
 def main() -> None:
@@ -110,8 +111,8 @@ def main() -> None:
             df["planned_departure"] = df["planned_departure"].astype(str)
             df["realtime_departure"] = df["realtime_departure"].astype(str)
 
-            df = df[df["planned_departure"].str.contains("2022", regex=True)]
-            df = df[df["realtime_departure"].str.contains("2022", regex=True)]
+            df = df[df["planned_departure"].str.contains(f"{DATE}", regex=True)]
+            df = df[df["realtime_departure"].str.contains(f"{DATE}", regex=True)]
             df = df.drop_duplicates()
 
             # create PostgreSQL table

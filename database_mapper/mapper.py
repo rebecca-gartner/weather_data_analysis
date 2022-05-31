@@ -12,7 +12,7 @@ DATE = 2022
 PATH = "database_mapper"
 
 
-def main(date):
+def main() -> None:
     """
     extracts weather data from MongoDB and inserts it into a PostreSQL table
 
@@ -69,7 +69,7 @@ def main(date):
             weather_list = []
             try:
                 x = col.find_one(
-                    {"data.weather.timestamp": {"$regex": f".*{date}.*"}}
+                    {"data.weather.timestamp": {"$regex": f".*{DATE}.*"}}
                 )  # in UTC time
                 weather_list.append(x)
                 columns = list(weather_list[0]["data"]["weather"][0].keys())
@@ -131,4 +131,4 @@ def main(date):
 
 
 if __name__ == "__main__":
-    main(DATE)
+    main()

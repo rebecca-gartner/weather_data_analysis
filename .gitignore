@@ -137,3 +137,5 @@ dmypy.json
 .TENANT_ID
 .CLIENT
 .KEY
+
+database.ini

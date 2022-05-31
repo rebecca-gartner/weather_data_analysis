@@ -15,8 +15,8 @@ minutes = minutes1 + minutes2
 # dates
 START_DATE = datetime(2022, 1, 12)
 END_DATE = datetime(2022, 1, 15)
-hafasID = 4272
-first_n = 2
+HAFAS_ID = 4272
+FIRST_N = 2
 
 
 def main(start_date, end_date, hafasID, first_n) -> None:
@@ -42,4 +42,4 @@ def main(start_date, end_date, hafasID, first_n) -> None:
 
 
 if __name__ == "__main__":
-    main(START_DATE, END_DATE, hafasID, first_n)
+    main(START_DATE, END_DATE, HAFAS_ID, FIRST_N)
