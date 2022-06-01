@@ -126,7 +126,7 @@ def main() -> None:
                             except psycopg2.errors.DatabaseError:
                                 print("error inserting the data")
 
-            except:
+            except Exception:
                 logger.error("no matching entry found in MongoDB")
 
 
