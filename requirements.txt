@@ -1,2 +1,13 @@
 pymongo
 requests
+logging
+yaml
+datetime
+typing
+json
+adal
+os
+sys 
+pandas
+psycopg2
+pytz
