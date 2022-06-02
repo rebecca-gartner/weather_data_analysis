@@ -16,8 +16,6 @@ def main() -> None:
     """
     extracts weather data from MongoDB and inserts it into a PostreSQL table
 
-    parameter:
-    date: date for which weather data exists in MongoDB
     """
     # connect to MongoDB and create Weather DB
     client = MongoClient(port=os.environ.get("PORT"))
